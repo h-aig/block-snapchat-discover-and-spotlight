@@ -11,6 +11,7 @@ class SnapchatBlockerService : AccessibilityService() {
     companion object {
         private const val TAG = "SnapchatBlockerService"
         private const val SNAPCHAT_PACKAGE = "com.snapchat.android"
+        private const val DEBOUNCE_DELAY_MS = 2000L // 2 seconds
 
         // Known Discover page identifiers
         private val BLOCKED_PAGE_INDICATORS = listOf(
@@ -18,6 +19,9 @@ class SnapchatBlockerService : AccessibilityService() {
             "For you",  // On top of Spotlight page
         )
     }
+
+    // Track last time we performed the back action to prevent multiple triggers
+    private var lastActionTime = 0L
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -60,11 +64,23 @@ class SnapchatBlockerService : AccessibilityService() {
 
             // Check if we're on a blocked page (Discover)
             if (isBlockedPage(rootNode)) {
+                // Check if enough time has passed since last action (debouncing)
+                val currentTime = System.currentTimeMillis()
+                if (currentTime - lastActionTime < DEBOUNCE_DELAY_MS) {
+                    Log.d(TAG, "Debouncing - ignoring detection")
+                    rootNode.recycle()
+                    return
+                }
+
+                lastActionTime = currentTime
                 Log.d(TAG, "Blocked page detected (Discover)!")
                 Toast.makeText(this, "Discover blocked", Toast.LENGTH_SHORT).show()
 
                 // Press back button to exit
                 performGlobalAction(GLOBAL_ACTION_BACK)
+
+                // Then go home
+                performGlobalAction(GLOBAL_ACTION_HOME)
             }
 
             rootNode.recycle()
