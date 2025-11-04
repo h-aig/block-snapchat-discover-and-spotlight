@@ -15,9 +15,7 @@ class SnapchatBlockerService : AccessibilityService() {
 
         // Known Spotlight identifiers (we'll start with text matching for MVP)
         private val SPOTLIGHT_INDICATORS = listOf(
-            "spotlight",
-            "Spotlight",
-            "SPOTLIGHT"
+            "View Profile",
         )
     }
 
@@ -66,7 +64,7 @@ class SnapchatBlockerService : AccessibilityService() {
                 Toast.makeText(this, "Spotlight detected!", Toast.LENGTH_SHORT).show()
 
                 // DISABLED FOR DEBUGGING - Uncomment to enable blocking
-                // performGlobalAction(GLOBAL_ACTION_HOME)
+                performGlobalAction(GLOBAL_ACTION_HOME)
             }
 
             rootNode.recycle()
