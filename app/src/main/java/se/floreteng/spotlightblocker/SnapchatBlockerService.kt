@@ -16,7 +16,7 @@ class SnapchatBlockerService : AccessibilityService() {
         // Known Discover page identifiers
         private val BLOCKED_PAGE_INDICATORS = listOf(
             "View Profile",  // Appears at bottom of Discover content
-            "For You",  // On top of Spotlight page
+            "For you",  // On top of Spotlight page
         )
     }
 
