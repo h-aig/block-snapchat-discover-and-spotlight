@@ -1,5 +1,7 @@
 # Snapchat Blocker
 
+[![Download APK](https://img.shields.io/github/v/release/eliasfloreteng/block-snapchat-discover-and-spotlight?label=Download%20APK&style=for-the-badge&logo=android)](https://github.com/eliasfloreteng/block-snapchat-discover-and-spotlight/releases/latest/download/app-release.apk)
+
 Android app that uses Accessibility Services to automatically block specific sections in apps by detecting UI text patterns and returning to the home screen.
 
 ## Features
@@ -28,6 +30,7 @@ Android app that uses Accessibility Services to automatically block specific sec
 ## Configuration
 
 Default configuration blocks Snapchat Discover:
+
 - **App**: Snapchat (`com.snapchat.android`)
 - **Blocked Strings**: "View Profile", "For you"
 
