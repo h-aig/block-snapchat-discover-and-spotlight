@@ -2,7 +2,6 @@ package se.floreteng.spotlightblocker
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
-import android.content.Intent
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.widget.Toast
@@ -62,10 +61,10 @@ class SnapchatBlockerService : AccessibilityService() {
             // Check if we're on a blocked page (Discover)
             if (isBlockedPage(rootNode)) {
                 Log.d(TAG, "Blocked page detected (Discover)!")
-                Toast.makeText(this, "Discover blocked - going home", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Discover blocked", Toast.LENGTH_SHORT).show()
 
-                // Go home
-                performGlobalAction(GLOBAL_ACTION_HOME)
+                // Press back button to exit
+                performGlobalAction(GLOBAL_ACTION_BACK)
             }
 
             rootNode.recycle()
