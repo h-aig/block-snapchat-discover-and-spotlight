@@ -1,4 +1,4 @@
-package your.package.name // Replace with your actual package
+package se.floreteng.spotlightblocker
 
 import android.app.admin.DeviceAdminReceiver
 import android.content.Context
